@@ -1,5 +1,5 @@
 /*
-@version $Id: cp.js 34 2009-06-24 13:31:55Z roosit $
+@version $Id$
 @package BrickCMS
 @copyright Copyright (C) 2008 BrickCMS. All rights reserved.
 @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
