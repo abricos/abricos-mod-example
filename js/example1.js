@@ -81,9 +81,15 @@ var moduleInitialize = function(){
 		onLoad: function(){
 		},
 		onClick: function(el){
+			if (el.id == TId['dialog']['bcancel']){
+				this.close();
+				return true;
+			}
 			return false;
 		}
 	});
+	
+	Brick.mod.example.SimpleDialog = SimpleDialog;
 	
 })();
 };
