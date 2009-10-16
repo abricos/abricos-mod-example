@@ -1,13 +1,13 @@
 <?php 
 /**
-* @version $Id$
-* @package CMSBrick
-* @copyright Copyright (C) 2008 CMSBrick. All rights reserved.
-* @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
-*/
-
-/**
- * Демонстрационный модуль 
+ * Демонстрационный модуль
+ * 
+ * @version $Id$
+ * @package CMSBrick
+ * @subpackage Example
+ * @copyright Copyright (C) 2008 CMSBrick. All rights reserved.
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
+ * @author Alexander Kuzmin (roosit@cmsbrick.ru)
  */
 
 // Создание экземпляра модуля
@@ -18,6 +18,8 @@ CMSRegistry::$instance->modules->Register($mod);
 
 /**
  * Модуль Example
+ * @package CMSBrick
+ * @subpackage Example
  */
 class CMSModExample extends CMSModule {
 	
@@ -64,6 +66,8 @@ class CMSModExample extends CMSModule {
 
 /**
  * Запросы к БД (статичные функции)
+ * @package CMSBrick
+ * @subpackage Example
  */
 class CMSQExample {
 	
