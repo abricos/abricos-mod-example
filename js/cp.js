@@ -4,11 +4,11 @@
 @copyright Copyright (C) 2008 BrickCMS. All rights reserved.
 @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
 */
-
 /**
  * Регистрация модуля в панели управления
  * 
- * @module example
+ * @module Example
+ * @namespace Brick.mod.example
  */
 (function(){
 	

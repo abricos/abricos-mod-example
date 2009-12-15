@@ -1,14 +1,14 @@
-/**
-* @version $Id$
-* @package CMSBrick
-* @copyright Copyright (C) 2008 CMSBrick. All rights reserved.
-* @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
+/*
+@version $Id$
+@package Abricos
+@copyright Copyright (C) 2008 Abricos All rights reserved.
+@license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
 */
 
 /**
- * Примера №1.
+ * Пример №1.
  *
- * @module example
+ * @module Example
  * @namespace Brick.mod.example
  */
 (function(){
