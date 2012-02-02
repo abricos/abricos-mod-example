@@ -1,0 +1,72 @@
+<!--[*]
+[tt=main][/tt]
+[mod=example]up[/mod]
+[script]helloworld.php[/script]
+[bkvar=coreversion][/bkvar]
+[bkvar=exampleversion][/bkvar]
+[*]-->
+
+<script type="text/javascript">
+
+	// Параметры/переменные инициализировать с сервера, скриптом helloworld.php
+	var sCoreVersion = '[bkvar]coreversion[/bkvar]',
+		sExampleVersion = '[bkvar]exampleversion[/bkvar]';
+
+	var elLd = document.getElementById('aw-example-loading1');
+
+	// отобразить картинку "идет загрузка"
+	var showLoadingImage = function(){
+		if (elLd){
+			elLd.style.display = '';
+		}
+	};
+
+	// удалить картинку "идет загрузка"
+	var hideLoadingImage = function(){
+		if (elLd){
+			elLd.style.display = 'none';
+		}
+	};
+
+	// показать виджет
+	var showHelloWorldWidget = function(){
+		
+		showLoadingImage();
+
+		// запросить компонент helloworld из модуля example и по 
+		// окончанию его загрузки/инициализации выполнить функцию 
+		// переданную в параметрах 
+		Brick.ff('example', 'helloworld', function(){
+			var elContainer = document.getElementById('aw-example-container1');
+			var widget = new Brick.mod.example.HelloWorldWidget(elContainer, sCoreVersion, sExampleVersion);
+		});
+	};
+
+	// открыть панель
+	var showHelloWorldPanel = function(){
+		showLoadingImage();
+
+		Brick.ff('example', 'helloworld', function(){
+			hideLoadingImage();
+			var panel = new Brick.mod.example.HelloWorldPanel(sCoreVersion, sExampleVersion);
+		});
+	};
+
+	
+</script>
+<div class="bd">
+	<h3>Демонстрационный пример виджета "Привет Мир!"</h3>
+	
+	<div id="aw-example-container1" style="min-height: 200px; border: 1px dotted;"  >
+		<span id="aw-example-loading1" style="display: none" >
+			<img src="/images/loading.gif" />
+		</span>
+	</div>
+	
+	<p>
+		<input onclick="showHelloWorldWidget();" value='Отобазить виджет "Привет Мир!"' type="button" />
+		<input onclick="showHelloWorldPanel();" value='Открыть панель "Привет Мир!"' type="button" />
+	</p>
+	
+	[mod]example:up[/mod]
+</div>
