@@ -1,5 +1,5 @@
 /*
-@version $Id: helloworld.js 1413 2012-02-02 09:09:11Z roosit $
+@version $Id$
 @package Abricos
 @copyright Copyright (C) 2008-2011 Abricos All rights reserved.
 @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
@@ -8,8 +8,16 @@
 // Некоторые примеры JavaScript
 
 var Component = new Brick.Component();
+Component.requires = {
+		mod:[
+		     {name: 'sys', files: ['container.js']}
+		]
+	};
 Component.entryPoint = function(NS){
 	
+	var Dom = YAHOO.util.Dom,
+		TMG = this.template;
+
 /*
  *  В теле компонента не желательно вызывать функции или создавать объекты. То есть желательно придерживаться 
  *  следующей структуры:
@@ -45,55 +53,7 @@ Component.entryPoint = function(NS){
 	};
 	Workspace.prototype = {
 		init: function(){
-			
-			var pfunc = function(){
-				return 200;
-			};
-			
-			var f = function(){
-				this.init();
-			};
-			f.prototype = {
-				p1: null, // так делать нельзя!
-				init: function(){
-					
-					this.p1 = null; // так правильно!
-					this.p2 = '';
-					
-					Brick.console('in first');
-				},
-				destroy: function(){
-					
-				},
-				get: function(){
-					return 10+pfunc();
-				},
-				calc: function(p){
-					p = p || 0;
-					return p + this.get();
-				}
-			};
-			
-			
-			var myf = function(){
-				myf.superclass.constructor.call(this);
-			};
-			
-			YAHOO.extend(myf, f, {
-				calc: function(p){
-					var p1 = myf.superclass.calc.call(this, p);
-					
-					return p1*2;
-				}
-			});
-			
-			
-			var o1 = new f();
-			var o2 = new myf();
-			Brick.console([o1.calc(), o2.calc()]);
-			
-			o1.destroy();
-		
+			//здесь происходит инициализация
 		}
 		
 	};
@@ -110,5 +70,41 @@ Component.entryPoint = function(NS){
 		 *		new NS.Workspace();
 		 *	});
 		*/
+	};
+	
+	var ProfilePanel = function(uid){
+		this.uid = uid;
+		this.profile = null;
+		ProfilePanel.superclass.constructor.call(this, {
+			fixedcenter: true, width: '790px', height: '400px'
+		});
+	};
+	YAHOO.extend(ProfilePanel, Brick.widget.Dialog, {
+		initTemplate: function(){
+			var TM = TMG.build('profilepanel'), T = TM.data, TId = TM.idManager;
+			this._TM = TM; this._T = this._TM.data; this._TId = TId;		
+			return T['profilepanel'];
+		},
+		destroy: function(){
+			//Brick.console(this.profile); // - таким способом я анализирую содержимое объктов.
+			this.profile.pages[0].panel.close();
+			ProfilePanel.superclass.destroy.call(this);
+		},
+		onLoad: function(){
+			this.openProfile();
+		},
+		openProfile: function(){
+			var uid = this.uid;
+			var el = Dom.get(this._TId['profilepanel']['profile']);
+			var __self = this;
+			Brick.ff('bos', 'os', function(){
+				__self.profile = new Brick.mod.bos.PageManagerWidget(el, 'uprofile/ws/showws/'+uid+'/');
+			});
+		}
+	});
+	NS.ProfilePanel = ProfilePanel;
+	
+	NS.API.showProfile = function(param){
+		new NS.ProfilePanel(param.uid);
 	};
 };
