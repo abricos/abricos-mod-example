@@ -16,7 +16,7 @@ Component.requires = {
 Component.entryPoint = function(NS){
 	
 	var Dom = YAHOO.util.Dom,
-		TMG = this.template;
+		buildTemplate = this.buildTemplate;
 
 /*
  *  В теле компонента не желательно вызывать функции или создавать объекты. То есть желательно придерживаться 
@@ -81,13 +81,12 @@ Component.entryPoint = function(NS){
 	};
 	YAHOO.extend(ProfilePanel, Brick.widget.Dialog, {
 		initTemplate: function(){
-			var TM = TMG.build('profilepanel'), T = TM.data, TId = TM.idManager;
-			this._TM = TM; this._T = this._TM.data; this._TId = TId;		
-			return T['profilepanel'];
+			var TM = buildTemplate(this, 'profilepanel');		
+			return TM.replace('profilepanel');
 		},
 		destroy: function(){
 			//Brick.console(this.profile); // - таким способом я анализирую содержимое объктов.
-			this.profile.pages[0].panel.close();
+			this.profile.destroy();
 			ProfilePanel.superclass.destroy.call(this);
 		},
 		onLoad: function(){
@@ -95,7 +94,7 @@ Component.entryPoint = function(NS){
 		},
 		openProfile: function(){
 			var uid = this.uid;
-			var el = Dom.get(this._TId['profilepanel']['profile']);
+			var el = this._TM.getEl('profilepanel.profile');
 			var __self = this;
 			Brick.ff('bos', 'os', function(){
 				__self.profile = new Brick.mod.bos.PageManagerWidget(el, 'uprofile/ws/showws/'+uid+'/');
