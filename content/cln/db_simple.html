@@ -1,0 +1,28 @@
+<!--[*]
+[tt=main][/tt]
+[mod=example]up[/mod]
+[*]-->
+
+<div class="bd">
+	<h3>Простой пример работы с базой данных сервера</h3>
+	
+	<div id="aw-example-db" style="min-height: 200px; border: 1px dotted;"  >
+		<div id="aw-example-loading" style="text-align: center; margin: 80px auto">
+			<img src="/images/loading.gif" /> Идет загрузка виджета. Пожалуйста, подождите...
+		</div>
+	</div>
+	
+	[mod]example:up[/mod]
+</div>
+
+<script type="text/javascript">
+
+	// подгрузить JS компонент db_simple модуля example (/modules/example/js/db_simple.*)
+	Brick.ff('example', 'db_simple', function(){
+		var container = document.getElementById('aw-example-db');
+
+		// отобразить виджет в HTML элементе container
+		new Brick.mod.example.DbSimpleWidget(container);
+	});
+	
+</script>

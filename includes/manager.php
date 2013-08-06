@@ -1,12 +1,11 @@
 <?php
 /**
  * Управляющий менеджер модуля
- * @version $Id: module.php 1168 2011-10-28 04:51:52Z roosit $
+ * 
  * @package Example 
  * @subpackage 
  * @author Alexander Kuzmin <roosit@abricos.org>
  * @link http://abricos.org/mods/example Страница модуля
- * @copyright Copyright (C) 2008-2011 Abricos All rights reserved.
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  * @filesource
  */
@@ -48,8 +47,38 @@ class ExampleManager extends Ab_ModuleManager {
 	 */
 	public function AJAX($d){
 		switch($d->do){
+			case 'simplevalueload': return $this->SimpleValueLoad();
+			case 'simplevaluesave': return $this->SimpleValueSave($d->value);
 		}
 		return null;
+	}
+	
+	/**
+	 * Получить значение первой записи из таблицы exp_example
+	 */
+	public function SimpleValueLoad(){
+		$row = ExampleQuery::SimpleValueLoad($this->db);
+		if (empty($row)){ return ""; }
+		
+		return $row['title'];
+	}
+	
+	/**
+	 * Сохранить значение в первую запись таблицы exp_example
+	 * @param object $savedata
+	 */
+	public function SimpleValueSave($value){
+		
+		// получить первую строку таблицы exp_example
+		$row = ExampleQuery::SimpleValueLoad($this->db);
+		if (empty($row)){
+			// записей в таблицы exp_example нет, значит нужно создать запись
+			ExampleQuery::SimpleValueAppend($this->db, $value);
+		}else{
+			// обновить существующую запись
+			ExampleQuery::SimpleValueUpdate($this->db, $row['exampleid'], $value);
+		}
+		
 	}
 }
 
