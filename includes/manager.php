@@ -35,10 +35,25 @@ class ExampleManager extends Ab_ModuleManager {
 	}
 	
 	/**
-	 * Проверка роли доступа текущего пользователя на доступ к записи стикеров
+	 * Проверка роли на чтение текущего пользователя
+	 */
+	public function IsViewRole(){
+		return $this->IsRoleEnable(ExampleAction::VIEW);
+	}
+	
+	
+	/**
+	 * Проверка роли на запись текущего пользователя 
 	 */
 	public function IsWriteRole(){
-		return $this->module->permission->CheckAction(ExampleAction::WRITE) > 0;
+		return $this->IsRoleEnable(ExampleAction::WRITE);
+	}
+	
+	/**
+	 * Проверка роли администратора текущего пользователя
+	 */
+	public function IsAdminRole(){
+		return $this->IsRoleEnable(ExampleAction::ADMIN);
 	}
 	
 	/**
@@ -57,6 +72,11 @@ class ExampleManager extends Ab_ModuleManager {
 	 * Получить значение первой записи из таблицы exp_example
 	 */
 	public function SimpleValueLoad(){
+		if (!$this->IsViewRole()){
+			// у текущего пользователя нет доступ на чтение 
+			return null;
+		}
+		
 		$row = ExampleQuery::SimpleValueLoad($this->db);
 		if (empty($row)){ return ""; }
 		
@@ -68,6 +88,10 @@ class ExampleManager extends Ab_ModuleManager {
 	 * @param object $savedata
 	 */
 	public function SimpleValueSave($value){
+		if (!$this->IsWriteRole()){
+			// у текущего пользователя нет роли на запись
+			return null;
+		}
 		
 		// получить первую строку таблицы exp_example
 		$row = ExampleQuery::SimpleValueLoad($this->db);
@@ -78,7 +102,6 @@ class ExampleManager extends Ab_ModuleManager {
 			// обновить существующую запись
 			ExampleQuery::SimpleValueUpdate($this->db, $row['exampleid'], $value);
 		}
-		
 	}
 }
 
