@@ -19,5 +19,3 @@ $brick = Brick::$builder->brick;
 // установить значение переменным кирпича
 $brick->param->var['coreversion'] = Abricos::GetModule('sys')->version;
 $brick->param->var['exampleversion'] = Abricos::GetModule('example')->version;
-
-?>

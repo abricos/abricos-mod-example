@@ -16,5 +16,3 @@ $brick = Brick::$builder->brick;
 $brick->content = Brick::ReplaceVarByData($brick->content, array(
 	'myparamresult' => $brick->param->param['myparam']
 ));
-
-?>

@@ -79,5 +79,3 @@ if ($updateManager->isUpdate('0.1.3')){
 	// Установка прав пользователя по умолчанию в платформу
 	Abricos::GetModule('example')->permission->Install();
 }
-
-?>

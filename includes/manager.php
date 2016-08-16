@@ -104,5 +104,3 @@ class ExampleManager extends Ab_ModuleManager {
 		}
 	}
 }
-
-?>
