@@ -1,0 +1,22 @@
+{
+  "type": "response",
+  "version": "0.1.0",
+  "vars": {
+    "recordid": {
+      "type": "int"
+    },
+    "title": {
+      "type": "string",
+      "parse": "full"
+    }
+  },
+  "codes": {
+    "OK": 1,
+    "EMPTY_TITLE": 2
+  },
+  "fields": {
+    "recordid": {
+      "type": "int"
+    }
+  }
+}

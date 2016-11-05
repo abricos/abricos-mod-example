@@ -1,0 +1,53 @@
+<!--{widget}-->
+<div class="recordEditor panel panel-default">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title pull-left">
+            Просмотр записи
+        </h3>
+
+        <img data-wait="show" src="/images/loading.gif"/>
+
+        <div class="btn-toolbar pull-right">
+            <a data-url="record.edit({v#recordid})"
+               data-trigger="example:roles"
+               data-code="isAdmin"
+               class="btn btn-default btn-xs">
+                Редактировать
+            </a>
+            <a data-url="record.remove({v#recordid})"
+               data-trigger="example:roles"
+               data-code="isAdmin"
+               class="btn btn-default btn-xs">
+                Удалить
+            </a>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                Заголовок
+            </dt>
+            <dd>
+                <span id="{i#title}"></span>
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Создано
+            </dt>
+            <dd>
+                <span id="{i#date}"></span>
+            </dd>
+        </dl>
+    </div>
+    <div class="panel-footer text-center">
+        <div class="btn-toolbar pull-right">
+            <a data-url="record.list" class="btn btn-default btn-sm">
+                Вернуться к списку
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

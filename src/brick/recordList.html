@@ -1,0 +1,22 @@
+<!--[*]
+[script]brick/recordList.php[/script]
+
+[v=row]
+    <tr>
+        <td>{v#id}</td>
+        <td>{v#title}</td>
+        <td>{v#date}</td>
+    </tr>
+[/v]
+
+[*]-->
+<div class="recordList">
+    <table class="table table-hover table-striped table-bordered">
+        <thead><tr>
+            <th>ID</th>
+            <th>Заголовок</th>
+            <th>Создан</th>
+        </tr></thead>
+        <tbody>{v#list}</tbody>
+    </table>
+</div>

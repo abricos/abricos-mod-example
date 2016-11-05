@@ -1,0 +1,30 @@
+<!--{widget}-->
+<div class="recordEditor panel panel-default">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title pull-left">
+            Редактор записи
+        </h3>
+
+        <img data-wait="show" src="/images/loading.gif"/>
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <input id="{i#title}" type="text" class="form-control"
+                   placeholder="Введите заголовок записи"
+                   data-wait="disable"/>
+        </div>
+    </div>
+    <div class="panel-footer text-center">
+        <div class="btn-toolbar pull-right">
+            <button data-click="this:save" class="btn btn-default">
+                Сохранить
+            </button>
+            <a data-url="record.list" class="btn btn-default btn-sm">
+                Отмена
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

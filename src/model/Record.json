@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0",
+  "type": "model",
+  "fields": {
+    "id": {
+      "type": "int",
+      "dbField": "recordid"
+    },
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date",
+      "dbField": "dateline"
+    }
+  }
+}

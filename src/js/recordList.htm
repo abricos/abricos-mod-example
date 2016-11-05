@@ -1,0 +1,83 @@
+<!--{widget}-->
+<div class="recordList panel panel-default">
+    <div class="panel-heading text-center">
+
+        <h3 class="panel-title pull-left">Список записей</h3>
+
+        <div class="btn-toolbar pull-right">
+            <a data-url="record.create"
+               data-trigger="example:roles"
+               data-code="isAdmin"
+               class="btn btn-default btn-xs hide"
+               title="Добавить запись">
+                + Добавить
+            </a>
+            <button data-click="reloadRecordList"
+                    data-wait="disable"
+                    class="btn btn-default btn-xs" type="button">
+                Обновить
+            </button>
+        </div>
+
+        <span data-wait="show">
+            <img src="/images/loading.gif"/> Загрузка...
+        </span>
+
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="panel-body">
+        <div id="{i#list}"></div>
+    </div>
+</div>
+
+<!--{list}-->
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Название</th>
+        <th>Создано</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {v#rows}
+    </tbody>
+</table>
+
+<!--{row}-->
+<tr>
+    <td>{v#id}</td>
+    <td>
+        <a data-url="record.view({v#id})">
+            {v#title}
+        </a>
+    </td>
+    <td>{v#date}</td>
+    <td>
+        <div class="btn-toolbar pull-right">
+            <div class="btn-group">
+                <a data-url="record.view({v#id})"
+                   class="btn btn-default btn-xs"
+                   title="Просмотреть запись">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a data-url="record.edit({v#id})"
+                   class="btn btn-default btn-xs hide"
+                   data-trigger="example:roles"
+                   data-code="isAdmin"
+                   title="Редактировать запись">
+                    <i class="fa fa-pencil-square-o"></i>
+                </a>
+                <a data-url="record.remove({v#id})"
+                   class="btn btn-default btn-xs hide"
+                   data-trigger="example:roles"
+                   data-code="isAdmin"
+                   title="Удалить запись">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </div>
+        </div>
+    </td>
+</tr>
