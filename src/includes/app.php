@@ -12,15 +12,13 @@
  *
  * @property ExampleManager $manager
  */
-class ExampleApp extends AbricosApplication {
+class ExampleApp extends Ab_App {
 
-    protected function GetClasses(){
-        return array(
-            "Record" => "ExampleRecord",
-            "RecordList" => "ExampleRecordList",
-            "RecordSave" => "ExampleRecordSave",
-        );
-    }
+    protected $_aliases = array(
+        "Record" => "ExampleRecord",
+        "RecordList" => "ExampleRecordList",
+        "RecordSave" => "ExampleRecordSave",
+    );
 
     protected function GetStructures(){
         $ret = 'Record';
@@ -117,29 +115,19 @@ class ExampleApp extends AbricosApplication {
         return $ret;
     }
 
-    public function RecordToJSON($recordid){
-        $ret = $this->Record($recordid);
-        return $this->ResultToJSON('record', $ret);
-    }
-
+    /**
+     * @param int $recordid
+     * @return ExampleRecord
+     */
     public function Record($recordid){
-        if (!$this->IsViewRole()){
-            return AbricosResponse::ERR_FORBIDDEN;
-        }
-
         $recordid = intval($recordid);
 
         if ($this->CacheExists('Record', $recordid)){
             return $this->Cache('Record', $recordid);
         }
 
-        $d = ExampleQuery::Record($this->db, $recordid);
-        if (empty($d)){
-            return AbricosResponse::ERR_NOT_FOUND;
-        }
-
         /** @var ExampleRecord $record */
-        $record = $this->InstanceClass('Record', $d);
+        $record = $this->CreateFilled('Record', $recordid);
 
         $this->SetCache('Record', $recordid, $record);
 

@@ -1,0 +1,18 @@
+{
+  "name": "example",
+  "description": "Example module for Abricos Aplatform",
+  "version": "0.1.0",
+  "author": {
+    "name": "Alexander Kuzmin",
+    "email": "roosit@abricos.org",
+    "twitter": "roositab"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/abricos/abricos-mod-example.git"
+  },
+  "apidoc": {
+    "title": "Abricos Example Module"
+  }
+}

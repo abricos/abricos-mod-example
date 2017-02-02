@@ -14,9 +14,30 @@
  * @property string $title
  * @property int $date
  */
-class ExampleRecord extends AbricosModel {
+class ExampleRecord extends Ab_Model {
     protected $_structModule = 'example';
     protected $_structName = 'Record';
+
+    /**
+     * @param ExampleApp $app
+     * @param int $recordid
+     */
+    public function Fill($app, $recordid){
+        if (!$app->IsViewRole()){
+            $this->SetError(Ab_Response::ERR_FORBIDDEN);
+            return;
+        }
+
+        $recordid = intval($recordid);
+
+        $d = ExampleQuery::Record($app->db, $recordid);
+        if (empty($d)){
+            $this->SetError(Ab_Response::ERR_NOT_FOUND);
+            return;
+        }
+
+        $this->Update($d);
+    }
 }
 
 /**
@@ -25,7 +46,9 @@ class ExampleRecord extends AbricosModel {
  * @method ExampleRecord Get(int $id)
  * @method ExampleRecord GetByIndex(int $i)
  */
-class ExampleRecordList extends AbricosModelList {
+class ExampleRecordList extends Ab_ModelList {
+    protected $_structModule = 'example';
+    protected $_structName = 'RecordList';
 }
 
 /**
