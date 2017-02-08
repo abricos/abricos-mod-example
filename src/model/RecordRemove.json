@@ -1,0 +1,11 @@
+{
+  "type": "model",
+  "codes": {
+    "OK": 1
+  },
+  "fields": {
+    "recordid": {
+      "type": "int"
+    }
+  }
+}

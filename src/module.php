@@ -26,7 +26,7 @@ class ExampleModule extends Ab_Module {
     public function __construct(){
 
         // Версия модуля
-        $this->version = "0.1.0";
+        $this->version = "0.2.0";
 
         // Идентификатор модуля
         $this->name = "example";

@@ -19,12 +19,12 @@ Component.entryPoint = function(NS){
         onInitAppWidget: function(err, appInstance){
             var recordid = this.get('recordid');
 
-            appInstance.record(recordid, function(err, result){
+            appInstance.record(recordid, function(err, record){
                 this.set('waiting', false);
                 if (err){
                     return;
                 }
-                this.set('record', result.record);
+                this.set('record', record);
                 this.renderRecord();
             }, this);
         },

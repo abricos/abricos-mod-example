@@ -11,18 +11,18 @@ Component.entryPoint = function(NS){
         SYS = Brick.mod.sys;
 
     NS.RecordListWidget = Y.Base.create('recordListWidget', SYS.AppWidget, [], {
-        onInitAppWidget: function(err, appInstance, options){
+        onInitAppWidget: function(err, app, options){
             this.reloadRecordList();
         },
         reloadRecordList: function(){
             this.set('waiting', true);
 
-            this.get('appInstance').recordList(function(err, result){
+            this.get('appInstance').recordList(function(err, recordList){
                 this.set('waiting', false);
                 if (err){
                     return;
                 }
-                this.set('recordList', result.recordList);
+                this.set('recordList', recordList);
                 this.renderRecordList();
             }, this);
         },

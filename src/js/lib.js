@@ -1,50 +1,44 @@
 var Component = new Brick.Component();
 Component.requires = {
     mod: [
-        {name: '{C#MODNAME}', files: ['model.js']}
+        {name: 'sys', files: ['app.js']},
+        {name: '{C#MODNAME}', files: ['app.js', 'model.js']}
     ]
 };
 Component.entryPoint = function(NS){
+
     var COMPONENT = this,
         SYS = Brick.mod.sys;
 
-    NS.roles = new Brick.AppRoles('{C#MODNAME}', {
-        isView: 10,
-        isWrite: 30,
-        isAdmin: 50
-    });
-
-    SYS.Application.build(COMPONENT, {}, {
-        initializer: function(){
-            NS.roles.load(function(){
-                this.appStructure(function(){
-                    this.initCallbackFire();
-                }, this);
-            }, this);
-        },
-    }, [], {
-        APPS: {},
-        ATTRS: {
-            isLoadAppStructure: {value: true},
-            Record: {value: NS.Record},
-            RecordList: {value: NS.RecordList},
-            RecordSave: {value: NS.RecordSave},
-        },
-        REQS: {
+    SYS.createApp(COMPONENT, {}, {
+        API: {
             record: {
                 args: ['recordid'],
-                type: "model:Record",
+                type: "model:Record"
             },
             recordList: {
                 type: "modelList:RecordList"
             },
             recordSave: {
                 args: ['data'],
-                type: 'response:RecordSave',
+                toPOST: ['data'],
+                type: 'model:RecordSave'
             },
             recordRemove: {
-                args: ['recordid']
-            },
+                args: ['recordid'],
+                type: 'model:RecordRemove'
+            }
+        },
+        ATTRS: {
+            Record: {value: NS.Record},
+            RecordList: {value: NS.RecordList},
+            RecordSave: {value: NS.RecordSave},
+            RecordRemove: {value: NS.RecordRemove},
+        },
+        ROLES: {
+            isView: 10,
+            isWrite: 30,
+            isAdmin: 50
         },
         URLS: {
             ws: "#app={C#MODNAME}/wspace/ws/",

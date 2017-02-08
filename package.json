@@ -1,7 +1,7 @@
 {
   "name": "example",
   "description": "Example module for Abricos Aplatform",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Alexander Kuzmin",
     "email": "roosit@abricos.org",

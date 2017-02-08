@@ -21,6 +21,7 @@ class ExampleRecord extends Ab_Model {
     /**
      * @param ExampleApp $app
      * @param int $recordid
+     * @return void
      */
     public function Fill($app, $recordid){
         if (!$app->IsViewRole()){
@@ -49,27 +50,21 @@ class ExampleRecord extends Ab_Model {
 class ExampleRecordList extends Ab_ModelList {
     protected $_structModule = 'example';
     protected $_structName = 'RecordList';
-}
 
-/**
- * Interface ExampleRecordSaveVars
- *
- * @property int $recordid
- * @property string $title
- */
-interface ExampleRecordSaveVars {
-}
+    /**
+     * @param ExampleApp $app
+     */
+    public function Fill($app){
+        if (!$app->IsViewRole()){
+            $this->SetError(Ab_Response::ERR_FORBIDDEN);
+            return;
+        }
 
-/**
- * Class ExampleRecordSave
- *
- * @property ExampleRecordSaveVars $vars
- * @property int $recordid
- */
-class ExampleRecordSave extends AbricosResponse {
-    const CODE_OK = 1;
-    const CODE_EMPTY_TITLE = 2;
-
-    protected $_structModule = 'example';
-    protected $_structName = 'RecordSave';
+        $rows = ExampleQuery::RecordList($app->db);
+        while (($d = $app->db->fetch_array($rows))){
+            /** @var ExampleRecord $record */
+            $record = $app->Create('Record', $d);
+            $this->Add($record);
+        }
+    }
 }

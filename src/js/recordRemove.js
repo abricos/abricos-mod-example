@@ -20,12 +20,11 @@ Component.entryPoint = function(NS){
             var tp = this.template,
                 recordid = this.get('recordid');
 
-            appInstance.record(recordid, function(err, result){
+            appInstance.record(recordid, function(err, record){
                 this.set('waiting', false);
                 if (err){
                     return;
                 }
-                var record = result.record;
                 tp.setHTML({
                     title: record.get('title')
                 });

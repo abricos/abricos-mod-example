@@ -1,7 +1,6 @@
 {
-  "type": "response",
-  "version": "0.1.0",
-  "vars": {
+  "type": "model",
+  "args": {
     "recordid": {
       "type": "int"
     },

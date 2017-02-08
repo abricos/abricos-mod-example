@@ -22,12 +22,12 @@ Component.entryPoint = function(NS){
                 });
                 this.onLoadRecord(record);
             } else {
-                appInstance.record(recordid, function(err, result){
+                appInstance.record(recordid, function(err, record){
                     if (err){
                         this.set('waiting', false);
                         return;
                     }
-                    this.onLoadRecord(result.record);
+                    this.onLoadRecord(record);
                 }, this);
             }
         },
@@ -49,12 +49,12 @@ Component.entryPoint = function(NS){
                     title: tp.getValue('title')
                 };
 
-            this.get('appInstance').recordSave(sd, function(err, result){
+            this.get('appInstance').recordSave(sd, function(err, recordSave){
                 this.set('waiting', false);
                 if (err){
                     return;
                 }
-                var ds = result.recordSave,
+                var ds = recordSave,
                     recordid = ds.get('recordid');
                 this.set('recordid', recordid);
                 this.go('record.view', recordid);

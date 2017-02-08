@@ -9,15 +9,18 @@ Component.entryPoint = function(NS){
         SYS = Brick.mod.sys;
 
     NS.Record = Y.Base.create('record', SYS.AppModel, [], {
-        structureName: 'Record',
+        structureName: 'Record'
     });
 
     NS.RecordList = Y.Base.create('recordList', SYS.AppModelList, [], {
-        appItem: NS.Record,
+        appItem: NS.Record
     });
 
-    NS.RecordSave = Y.Base.create('recordSave', SYS.AppResponse, [], {
-        structureName: 'RecordSave',
+    NS.RecordSave = Y.Base.create('recordSave', SYS.AppModel, [], {
+        structureName: 'RecordSave'
     });
-
+    
+    NS.RecordRemove = Y.Base.create('recordRemove', SYS.AppModel, [], {
+        structureName: 'RecordRemove'
+    });
 };

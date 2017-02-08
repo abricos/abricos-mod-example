@@ -9,6 +9,8 @@
 
 /**
  * Class ExampleAPI
+ *
+ * @property ExampleApp $app
  */
 class ExampleAPI extends Ab_API {
 
@@ -16,6 +18,13 @@ class ExampleAPI extends Ab_API {
         'v1' => 'ExampleAPIMethodsV1'
     );
 
+    protected function OnRequestRoot(){
+        if (!$this->app->IsViewRole()){
+            return Ab_Response::ERR_FORBIDDEN;
+        }
+
+        return $this->ToJSON();
+    }
 }
 
 /**
@@ -25,12 +34,25 @@ class ExampleAPI extends Ab_API {
  */
 class ExampleAPIMethodsV1 extends Ab_APIMethods {
 
-    protected $_methods = array(
+    public $methods = array(
         'record' => 'Record',
         'recordList' => 'RecordList',
         'recordSave' => 'RecordSave',
         'recordRemove' => 'RecordRemove'
     );
+
+    protected function GetStructures(){
+        $ret = array(
+            'Record',
+            'RecordList'
+        );
+
+        if ($this->app->IsAdminRole()){
+            $ret[] = 'RecordSave';
+        }
+
+        return $ret;
+    }
 
     /**
      * @api {get} /api/example/v1/record/:recordid
@@ -58,4 +80,15 @@ class ExampleAPIMethodsV1 extends Ab_APIMethods {
     public function RecordList(){
         return $this->app->RecordList();
     }
+
+    public function RecordSave(){
+        $d = $this->POSTParamToObject('data');
+
+        return $this->app->RecordSave($d);
+    }
+
+    public function RecordRemove($recordid){
+        return $this->app->RecordRemove($recordid);
+    }
+
 }

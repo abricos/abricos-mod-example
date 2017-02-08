@@ -49,10 +49,12 @@ class ExampleQuery {
      * @param ExampleRecordSave $save
      */
     public static function RecordAppend(Ab_Database $db, ExampleRecordSave $save){
+        /** @var ExampleRecordSaveArgs $args */
+        $args = $save->GetArgs();
         $sql = "
 			INSERT INTO ".$db->prefix."example_record 
             (title, dateline) VALUES (
-				'".bkstr($save->vars->title)."',
+				'".bkstr($args->title)."',
 				".bkstr(TIMENOW)."
 			)
 		";
@@ -67,11 +69,13 @@ class ExampleQuery {
      * @param ExampleRecordSave $save
      */
     public static function RecordUpdate(Ab_Database $db, ExampleRecordSave $save){
+        /** @var ExampleRecordSaveArgs $args */
+        $args = $save->GetArgs();
         $sql = "
 			UPDATE ".$db->prefix."example_record
 			SET 
-			    title='".bkstr($save->vars->title)."'
-			WHERE recordid=".bkint($save->vars->recordid)."
+			    title='".bkstr($args->title)."'
+			WHERE recordid=".bkint($args->recordid)."
 			LIMIT 1
 		";
         $db->query_write($sql);
